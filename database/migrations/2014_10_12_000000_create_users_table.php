@@ -20,9 +20,11 @@ class CreateUsersTable extends Migration
             $table->string('last_name');
             $table->date('birthday');
             $table->string('gender');
+            $table->unsignedBigInteger('country_id');
             $table->string('phone');
-            $table->string('bio');
-            $table->string('picture');
+            $table->string('bio')->nullable();
+            $table->string('picture')->nullable();
+            $table->boolean('is_deactivate')->default(1)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
