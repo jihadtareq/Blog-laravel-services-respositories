@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Contracts\EloquentRepositoryInterface;
 use App\Repositories\Eloquent\BaseRepository;
+use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\UserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -15,7 +17,9 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //Dependency injection
         $this->app->bind(EloquentRepositoryInterface::class,BaseRepository::class);
+        $this->app->bind(UserRepositoryInterface::class,UserRepository::class);
     }
 
     /**
