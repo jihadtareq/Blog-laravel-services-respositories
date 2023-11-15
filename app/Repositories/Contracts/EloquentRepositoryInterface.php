@@ -13,22 +13,23 @@ interface EloquentRepositoryInterface
     store, and remove data. (CRUD)
     */
 
-    public function all(array $columns = ['*'],array $relations = [] ) : Collection ;
+    function all(array $columns = ['*'],array $relations = [] ) : Collection ;
 
-    public function allTrashed() : Collection ;
+    function allTrashed() : Collection ;
 
-    public function findById(int $id,array $columns=['*'],array $relations = [],array $appends = []) : ?Model ;
+    function findById(int $id,array $columns=['*'],array $relations = [],array $appends = []) : ?Model ;
 
-    public function findTrashedById(int $id) : ?Model ;
+    function findTrashedById(int $id) : ?Model ;
 
-    public function create(array $payload) : ?Model;
-    public function update(int $id,array $payload) : bool;
+    function create(array $payload) : ?Model;
+    function update(int $id,array $payload) : bool;
 
-    public function deleteById(int $id) : bool;
+    function deleteById(int $id) : bool;
 
-    public function restoreById(int $id) : bool;
+    function restoreById(int $id) : bool;
 
-    public function permanentlyDeleteById(int $id) : bool;
+    function permanentlyDeleteById(int $id) : bool;
+    function customizePayload(array $data) : array;
     
 
 
