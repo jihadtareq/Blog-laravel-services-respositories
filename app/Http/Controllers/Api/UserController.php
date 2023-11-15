@@ -48,9 +48,9 @@ class UserController extends Controller
     public function store(StoreValidation $request)
     {
        try {
-            $users = $this->userRepository->create($request->all());
+            $user = $this->userRepository->create($request->except('password_confirmation'));
             
-            return response()->json(['message'=>'success','data'=>$users],200);
+            return response()->json(['message'=>'success','data'=>$user],200);
         } catch (\Throwable $th) {
             //throw $th;
             return response()->json(['message'=>'failed','error'=>$th->getMessage()],500);

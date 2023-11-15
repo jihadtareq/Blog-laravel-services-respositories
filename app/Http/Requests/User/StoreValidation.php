@@ -30,9 +30,9 @@ class StoreValidation extends FormRequest
             'phone'=>['required','unique:users,phone'],
             'email'=>['email','unique:users,email'],
             'password'=>['required','confirmed'],
-            'birthday'=>['required','after:1900','before:2015'],
+            'birthday'=>['required'],
             'gender'=>['required'],
-            'bio'=>['required','max_digits:200'],
+            'bio'=>['required','max:200'],
             'picture'=>['nullable','mimes:jpg,png,bmp'],
         ];
     }

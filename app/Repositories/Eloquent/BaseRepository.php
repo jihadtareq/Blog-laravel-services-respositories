@@ -39,6 +39,7 @@ class BaseRepository implements EloquentRepositoryInterface
 
     public function create(array $payload) : ?Model
     {
+        // dd($payload);
        $model = $this->model->create($payload);
 
        return $model->fresh();
