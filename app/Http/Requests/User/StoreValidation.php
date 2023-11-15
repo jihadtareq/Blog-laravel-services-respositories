@@ -24,9 +24,9 @@ class StoreValidation extends FormRequest
     public function rules()
     {
         return [
-            'first_name'=>['required'],
-            'last_name'=>['required'],
-            'user_name'=>['required','unique:users,user_name'],
+            'firstName'=>['required'],
+            'lastName'=>['required'],
+            'userName'=>['required','unique:users,user_name'],
             'phone'=>['required','unique:users,phone'],
             'email'=>['email','unique:users,email'],
             'password'=>['required','confirmed'],
