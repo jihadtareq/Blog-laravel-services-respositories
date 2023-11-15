@@ -39,9 +39,8 @@ class BaseRepository implements EloquentRepositoryInterface
 
     public function create(array $payload) : ?Model
     {
-        // dd($payload);
+       $payload = $this->customizePayload($payload);
        $model = $this->model->create($payload);
-
        return $model->fresh();
     }
     public function update(int $id,array $payload) : bool
@@ -64,5 +63,21 @@ class BaseRepository implements EloquentRepositoryInterface
     {
         return $this->model->onlyTrashed()->findOrFail($id)->forceDelete();
     }
+
+    public function customizePayload(array $payload) : array {
+
+        $data = [];
+        foreach ($payload as $field =>$value) {
+            $result = preg_replace('/([A-Z])/', '_$1', $field);
+            $result = strtolower($result);
+            // Remove leading underscore if it exists
+            $result = ltrim($result, '_');
+            $data[$result] = $value;
+        }
+
+        return $data;
+    }
+
+
 
 }

@@ -12,22 +12,23 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     {
         $this->model = $model;
     }
-    // public function create($data)
-    // {
-    //     $user = new User;
-    //     $user->first_name = $data['firstName'];
-    //     $user->last_name = $data['lastName'];
-    //     $user->user_name = $data['userName'];
-    //     $user->phone = $data['phone'];
-    //     $user->email = $data['email'];
-    //     $user->password = $data['password'];
-    //     $user->birthday = $data['birthday'];
-    //     $user->gender = $data['gender'];
-    //     $user->bio = $data['bio'] ?? null;
-    //     $user->picture = $data['picture'] ?? null;
-    //     $user->save();
 
-    //     return $user;
+    //overWrite method if you need it
+
+    // protected function customizePayload(array $data) : array {
+    //     return [
+    //         'first_name'=>$data['firstName'],
+    //         'last_name'=>$data['lastName'],
+    //         'user_name'=>$data['userName'],
+    //         'phone'=>$data['phone'],
+    //         'email'=>$data['email'],
+    //         'password'=>$data['password'],
+    //         'birthday'=>$data['birthday'],
+    //         'picture'=>$data['picture'] ?? null,
+    //         'bio'=>$data['bio'],
+    //         'gender'=>$data['gender'],
+    //     ];
+
     // }
     
 }
