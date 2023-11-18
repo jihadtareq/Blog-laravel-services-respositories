@@ -45,6 +45,7 @@ class BaseRepository implements EloquentRepositoryInterface
     }
     public function update(int $id,array $payload) : bool
     {
+        $payload = $this->customizePayload($payload);
         $model = $this->model->findOrFail($id);
         return $model->update($payload);
     }

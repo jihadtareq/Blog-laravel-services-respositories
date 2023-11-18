@@ -37,5 +37,22 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     //     ];
 
     // }
+
+
+    public function deactivateAccount(int $id,string $reason) : bool
+    {
+        $user = $this->model::find($id);
+        return $user->update([
+            'is_deactivate' => 1,
+            'deactivate_reason' => $reason
+       ]);
+    }
+
+    public function reactivateAccount(int $id)
+    {
+        $user = $this->model::find($id);
+        $user->is_deactivate =0;
+        $user->save();
+    }
     
 }

@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->string('bio')->nullable();
             $table->string('picture')->nullable();
-            $table->boolean('is_deactivate')->default(1)->nullable();
+            $table->boolean('is_deactivate')->default(0)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
