@@ -18,6 +18,7 @@ class LoginService
     public function getToken($data)
     {
         $user =  $this->userRepository->getUserByEmail($data['email']);
+        
         if($user && Hash::check($data['password'], $user->password))
         {
             $user->accessToken = $user->createToken('users')->accessToken; 

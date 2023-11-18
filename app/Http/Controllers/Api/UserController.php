@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreValidation;
-use App\Repositories\UserRepositoryInterface;
+use App\Http\Requests\User\UpdateUserRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 
@@ -74,6 +74,17 @@ class UserController extends Controller
         }
     }
 
+
+    public function userAccount()
+    {
+        try {
+            $user = $this->userService->getUserById(request()->user->id);
+            return response()->json(['message'=>'success','data'=>$user],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message'=>'failed','error'=>$th->getMessage()],500);
+        }
+    }
     /**
      * Show the form for editing the specified resource.
      *
@@ -92,9 +103,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request)
     {
-        //
+        try {
+            $this->userService->updateUserInformation($request->all());
+            return response()->json(['message'=>'success','data'=>'Information is updated successfully.'],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message'=>'failed','error'=>$th->getMessage()],500);
+        }
     }
 
     /**
@@ -106,6 +123,20 @@ class UserController extends Controller
     public function destroy($id)
     {
         
-        //
+        
     }
+
+    public function deactivateUserAccount(Request $request)
+    {
+        try {
+            $this->userService->deactivateUserAccount($request->all());
+            return response()->json(['message'=>'success','data'=>'The account is deactivated successfully.'],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message'=>'failed','error'=>$th->getMessage()],500);
+        }
+        
+    }
+
+    
 }
