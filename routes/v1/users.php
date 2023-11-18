@@ -1,8 +1,12 @@
 <?php
-// Route::prefix('users')->middleware('auth:api')->group(function(){
 Route::prefix('users')->group(function(){
-
-    Route::resource('/','UserController');
-    // Route::get('register','RegisterController@register');
     Route::post('/register','UserController@register');
+    
+    Route::group(['middleware' => ['auth:api','userCheck']], function () {
+        Route::get('/','UserController@index');
+        Route::get('/{userId}','UserController@show');
+        // Route::post('/deactivate-account','UserController@deactivateAccount');
+        // Route::delete('/delete','UserController@destory');
+        // Route::patch('/update-info','UserController@update');
+    });
 });

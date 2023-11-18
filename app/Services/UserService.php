@@ -29,4 +29,10 @@ class UserService
         return new UserResource($user);
     }
 
+    public function getUserById($id)
+    {
+        return new UserResource($this->userRepository->findById($id));
+
+    }
+
 }

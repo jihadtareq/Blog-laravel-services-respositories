@@ -65,7 +65,13 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        try {
+            $user = $this->userService->getUserById($id);
+            return response()->json(['message'=>'success','data'=>$user],200);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return response()->json(['message'=>'failed','error'=>$th->getMessage()],500);
+        }
     }
 
     /**
