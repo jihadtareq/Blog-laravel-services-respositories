@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\User;
 use App\Repositories\UserRepositoryInterface;
+use Illuminate\Database\Eloquent\Model;
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
     protected $model;
@@ -11,6 +12,12 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
     public function __construct(User $model)
     {
         $this->model = $model;
+    }
+
+    public function getUserByEmail(string $email) : ?Model 
+    {
+        return $this->model::where('email',$email)->first();
+        
     }
 
     //overWrite method if you need it
