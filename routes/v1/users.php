@@ -3,5 +3,6 @@
 Route::prefix('users')->group(function(){
 
     Route::resource('/','UserController');
-    Route::get('register','RegisterController@register');
+    // Route::get('register','RegisterController@register');
+    Route::post('/register','UserController@register');
 });

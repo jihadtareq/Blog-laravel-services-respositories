@@ -6,21 +6,21 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\User\StoreValidation;
 use App\Repositories\UserRepositoryInterface;
 use Illuminate\Http\Request;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
 
-    protected $userRepository;
+    protected $userService;
 
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserService $userService)
     {
-        $this->userRepository = $userRepository;
+        $this->userService = $userService;
     }
     public function index()
     {
         try {
-            $users = $this->userRepository->all();
-
+            $users = $this->userService->all();
             return response()->json(['message'=>'success','data'=>$users],200);
         } catch (\Throwable $th) {
             //throw $th;
@@ -45,11 +45,11 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreValidation $request)
+    // public function register(StoreValidation $request)
+    public function register(Request $request)
     {
        try {
-            $user = $this->userRepository->create($request->except('password_confirmation'));
-            
+            $user = $this->userService->register($request->except('password_confirmation'));
             return response()->json(['message'=>'success','data'=>$user],200);
         } catch (\Throwable $th) {
             //throw $th;
