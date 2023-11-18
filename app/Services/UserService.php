@@ -23,6 +23,7 @@ class UserService
         $pictureName = time().'.'.$data['picture']->getClientOriginalExtension();
         $data['picture']->move(public_path('images'), $pictureName);
         $data['picture'] = $pictureName;
+        $data['password'] = bcrypt($data['password']);
         $user =  $this->userRepository->create($data);
         $user->accessToken = $user->createToken('users')->accessToken; 
         return new UserResource($user);

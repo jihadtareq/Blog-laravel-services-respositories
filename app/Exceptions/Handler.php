@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+        BusinessException::class,
     ];
 
     /**
@@ -36,6 +36,13 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->reportable(function (BusinessException $e) {
+            if (request()->is('api/*')) {
+                return response()->json(['error' => $e->getMessage()], 422);
+            }
+
         });
     }
 }
